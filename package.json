@@ -1,0 +1,22 @@
+{
+  "name": "express-load-router",
+  "version": "0.1.0",
+  "description": "automatic create routers from specified folder",
+  "author": "Fantasy Shao <fantasyshao@icloud.com>",
+  "license": "MIT",
+  "repository": "git@github.com:SFantasy/express-load-router",
+  "scripts": {
+    "prepublish": "npm run lint",
+    "lint": "./node_modules/.bin/eslint ."
+  },
+  "dependencies": {
+    "glob": "^7.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.6.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.3.0"
+  }
+}
