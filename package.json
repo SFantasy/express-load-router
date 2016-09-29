@@ -7,7 +7,7 @@
   "repository": "git@github.com:SFantasy/express-load-router",
   "scripts": {
     "prepublish": "npm run lint",
-    "lint": "./node_modules/.bin/eslint ."
+    "lint": "./node_modules/.bin/eslint index.js"
   },
   "dependencies": {
     "glob": "^7.1.0"
