@@ -1,6 +1,6 @@
 {
   "name": "express-load-router",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "automatic create routers from specified folder",
   "author": "Fantasy Shao <fantasyshao@icloud.com>",
   "license": "MIT",
@@ -10,7 +10,7 @@
     "lint": "./node_modules/.bin/eslint index.js"
   },
   "dependencies": {
-    "glob": "^7.1.0"
+    "glob": "^7.1.1"
   },
   "devDependencies": {
     "eslint": "^3.6.1",
