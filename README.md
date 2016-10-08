@@ -22,18 +22,20 @@ npm i express-load-router -S
 ## Usage
 
 ```js
+const path = require('path');
 const express = require('express');
 const loadRouter = require('express-load-router');
 
 const app = express();
 
-loadRouter(app, '/controllers');
+// Use `path.join(__dirname, 'path/to/folder')` here
+loadRouter(app, path.join(__dirname, 'controllers'));
 ```
 
 ### Options
 
 ```js
-loadRouter(app, '/controllers', options);
+loadRouter(app, path.join(__dirname, 'controllers'), options);
 ```
 
      option    |  type | default 
