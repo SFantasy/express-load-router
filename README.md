@@ -30,6 +30,17 @@ const app = express();
 loadRouter(app, '/controllers');
 ```
 
+### Options
+
+```js
+loadRouter(app, '/controllers', options);
+```
+
+     option    |  type | default 
+---------------|-------|---------
+`excludeRules` | Array | `[]`
+`rewriteRules` | Map   | `new Map()`
+
 ## Example
 
 See [example](example/).
