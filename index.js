@@ -36,9 +36,9 @@ function loadRouter(app, root, options) {
       if (excludeRules.indexOf(modifiedUrl) !== -1) {
         // Nothing to-do with the excluded rules
       } else if (METHOD_ENUM.indexOf(methodLower) !== -1) {
-        rewriteRules.has(modifiedUrl) ?
-          app[methodLower](rewriteRules.get(modifiedUrl), handler) :
-          app[methodLower](modifiedUrl, handler);
+        app[methodLower](rewriteRules.has(modifiedUrl) ?
+          rewriteRules.get(modifiedUrl) :
+          modifiedUrl, handler);
       } else {
         throw Error('[load-router]: invalid method: ', methodLower);
       }
