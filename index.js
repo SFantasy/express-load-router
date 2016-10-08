@@ -6,6 +6,8 @@ const glob = require('glob');
 const METHOD_ENUM = ['get', 'post', 'put', 'delete'];
 
 function loadRouter(app, root, options) {
+  const opt = options || {};
+
   glob.sync(`${root}/**/*.js`).forEach((file) => {
     const filePath = file.replace(/\.[^.]*$/, '');
     const controller = require(filePath);
@@ -13,8 +15,8 @@ function loadRouter(app, root, options) {
     const methods = Object.keys(controller);
 
     // Handle options
-    const excludeRules = options.excludeRules || [];
-    const rewriteRules = options.rewriteRules || new Map();
+    const excludeRules = opt.excludeRules || [];
+    const rewriteRules = opt.rewriteRules || new Map();
 
     methods.forEach((method) => {
       let handler = controller[method];
