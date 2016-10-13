@@ -3,6 +3,8 @@
 // Module dependencies
 const glob = require('glob');
 
+const compose = require('./lib/compose');
+
 const METHOD_ENUM = ['get', 'post', 'put', 'delete'];
 
 function loadRouter(app, root, options) {
@@ -21,11 +23,14 @@ function loadRouter(app, root, options) {
     methods.forEach((method) => {
       let handler = controller[method];
       let modifiedUrl = url;
+      let middlewares = [];
+
       const methodLower = method.toLowerCase();
 
       switch (typeof handler) {
         case 'object':
           modifiedUrl += `/${handler.params.join('/')}`;
+          middlewares = handler.middlewares || [];
           handler = handler.handler;
           break;
         case 'function':
@@ -40,7 +45,7 @@ function loadRouter(app, root, options) {
       } else if (METHOD_ENUM.indexOf(methodLower) !== -1) {
         app[methodLower](rewriteRules.has(modifiedUrl) ?
           rewriteRules.get(modifiedUrl) :
-          modifiedUrl, handler);
+          modifiedUrl, compose(middlewares), handler);
       } else {
         throw Error('[load-router]: invalid method: ', methodLower);
       }
