@@ -31,7 +31,7 @@ function loadRouter(app, root, options) {
       switch (typeof body) {
         case 'object':
           params = body.params || [];
-          middlewares = body.middlewares;
+          middlewares = body.middlewares || [];
           modifiedUrl += `/${params.join('/')}`;
           handler = body.handler;
           method = (body.method || 'get').toLowerCase();
