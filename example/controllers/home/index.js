@@ -1,1 +1,1 @@
-exports.GET = (req, res) => res.send('home');
+exports.index = (req, res) => res.send('home');
