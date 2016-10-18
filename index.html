@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Express-load-router by SFantasy</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Express-load-router</h1>
+        <p>Automatic create routers from specified folder</p>
+
+        <p class="view"><a href="https://github.com/SFantasy/express-load-router">View the Project on GitHub <small>SFantasy/express-load-router</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/SFantasy/express-load-router/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/SFantasy/express-load-router/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/SFantasy/express-load-router">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="express-load-router" class="anchor" href="#express-load-router" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>express-load-router</h1>
+
+<p>Load routers from specific folders for Express.js</p>
+
+<p><a href="https://npmjs.com/package/express-load-router"><img src="https://img.shields.io/npm/v/express-load-router.svg" alt="NPM version"></a>
+<a href="https://npmjs.com/package/express-load-router"><img src="https://img.shields.io/npm/dm/express-load-router.svg" alt="npm download"></a>
+<a href="https://david-dm.org/SFantasy/express-load-router"><img src="https://img.shields.io/david/SFantasy/express-load-router.svg" alt="David deps"></a></p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h2>
+
+<pre><code>npm i express-load-router -S
+</code></pre>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">const</span> <span class="pl-c1">path</span> <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>path<span class="pl-pds">'</span></span>);
+<span class="pl-k">const</span> <span class="pl-c1">express</span> <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>express<span class="pl-pds">'</span></span>);
+<span class="pl-k">const</span> <span class="pl-c1">loadRouter</span> <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>express-load-router<span class="pl-pds">'</span></span>);
+
+<span class="pl-k">const</span> <span class="pl-c1">app</span> <span class="pl-k">=</span> <span class="pl-en">express</span>();
+
+<span class="pl-c">// Use `path.join(__dirname, 'path/to/folder')` here</span>
+<span class="pl-en">loadRouter</span>(app, <span class="pl-smi">path</span>.<span class="pl-c1">join</span>(<span class="pl-c1">__dirname</span>, <span class="pl-s"><span class="pl-pds">'</span>controllers<span class="pl-pds">'</span></span>));</pre></div>
+
+<h3>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Options</h3>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-en">loadRouter</span>(app, <span class="pl-smi">path</span>.<span class="pl-c1">join</span>(<span class="pl-c1">__dirname</span>, <span class="pl-s"><span class="pl-pds">'</span>controllers<span class="pl-pds">'</span></span>), options);</pre></div>
+
+<table>
+<thead>
+<tr>
+<th>option</th>
+<th>type</th>
+<th>default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>excludeRules</code></td>
+<td>Array</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>rewriteRules</code></td>
+<td>Map</td>
+<td><code>new Map()</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="controller-declaration" class="anchor" href="#controller-declaration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>Controller</code> declaration</h3>
+
+<p>There are three kinds of <code>Controller</code> for this package:</p>
+
+<ul>
+<li>Plain function</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c1">exports</span>.<span class="pl-en">api</span> <span class="pl-k">=</span> (<span class="pl-smi">req</span>, <span class="pl-smi">res</span>) <span class="pl-k">=&gt;</span> {
+  <span class="pl-smi">res</span>.<span class="pl-c1">send</span>(<span class="pl-s"><span class="pl-pds">'</span>API<span class="pl-pds">'</span></span>);
+};</pre></div>
+
+<ul>
+<li>Object</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>method</td>
+<td>String</td>
+<td>No</td>
+<td><code>GET</code></td>
+<td>one of ['GET', 'POST', 'PUT', 'DELETE']</td>
+</tr>
+<tr>
+<td>params</td>
+<td>Array</td>
+<td>No</td>
+<td><code>[]</code></td>
+<td></td>
+</tr>
+<tr>
+<td>middlewares</td>
+<td>Array</td>
+<td>No</td>
+<td><code>[]</code></td>
+<td>Array of middlewares, see below</td>
+</tr>
+<tr>
+<td>handler</td>
+<td>Function</td>
+<td>Yes</td>
+<td>--</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<p>e.g.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c1">exports</span>.<span class="pl-smi">api</span> <span class="pl-k">=</span> {
+  method<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>GET<span class="pl-pds">'</span></span>,
+  params<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>:id<span class="pl-pds">'</span></span>],
+  <span class="pl-en">handler</span>(<span class="pl-smi">req</span>, <span class="pl-smi">res</span>) {
+    <span class="pl-smi">res</span>.<span class="pl-c1">send</span>(<span class="pl-s"><span class="pl-pds">'</span>API<span class="pl-pds">'</span></span>);
+  }
+};</pre></div>
+
+<h3>
+<a id="middlewares-support" class="anchor" href="#middlewares-support" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Middlewares support</h3>
+
+<p>This package also support <code>middlewares</code> in <code>controller</code>.</p>
+
+<p>e.g.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c1">exports</span>.<span class="pl-smi">api</span> <span class="pl-k">=</span> {
+  method<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>GET<span class="pl-pds">'</span></span>,
+  params<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>:id<span class="pl-pds">'</span></span>],
+  middlewares<span class="pl-k">:</span> [
+    <span class="pl-k">function</span> (<span class="pl-smi">req</span>, <span class="pl-smi">res</span>, <span class="pl-smi">next</span>) {
+      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>Middleware 1<span class="pl-pds">'</span></span>);
+      <span class="pl-en">next</span>();
+    },
+    <span class="pl-k">function</span> (<span class="pl-smi">req</span>, <span class="pl-smi">res</span>, <span class="pl-smi">next</span>) {
+      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>Middleware 2<span class="pl-pds">'</span></span>);
+      <span class="pl-en">next</span>();
+    },
+  ],
+  <span class="pl-en">handler</span>(<span class="pl-smi">req</span>, <span class="pl-smi">res</span>) {
+    <span class="pl-k">return</span> <span class="pl-smi">res</span>.<span class="pl-c1">send</span>(<span class="pl-s"><span class="pl-pds">`</span>product detail <span class="pl-s1"><span class="pl-pse">${</span><span class="pl-smi">req</span>.<span class="pl-smi">params</span>.<span class="pl-c1">id</span><span class="pl-pse">}</span></span><span class="pl-pds">`</span></span>);
+  },
+};</pre></div>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+
+<p>See <a href="example/">example</a>.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>The MIT License</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/SFantasy">SFantasy</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
