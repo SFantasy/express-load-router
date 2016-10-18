@@ -1,4 +1,4 @@
-exports.GET = {
+exports.index = {
   params: [':id'],
   middlewares: [
     function (req, res, next) {
@@ -13,4 +13,8 @@ exports.GET = {
   handler(req, res) {
     return res.send(`product detail ${req.params.id}`);
   },
+};
+
+exports.api = (req, res) => {
+  return res.send('Product detail api');
 };

@@ -13,41 +13,58 @@ function loadRouter(app, root, options) {
   glob.sync(`${root}/**/*.js`).forEach((file) => {
     const filePath = file.replace(/\.[^.]*$/, '');
     const controller = require(filePath);
-    const url = filePath.replace(root, '').replace(/\/index$/, '');
+    const urlPrefix = filePath.replace(root, '').replace(/\/index$/, '');
     const methods = Object.keys(controller);
 
     // Handle options
     const excludeRules = opt.excludeRules || [];
     const rewriteRules = opt.rewriteRules || new Map();
 
-    methods.forEach((method) => {
-      let handler = controller[method];
-      let modifiedUrl = url;
+    function applyMethod(name, methodBody) {
+      const body = methodBody;
+      let modifiedUrl = `${urlPrefix}/${name === 'index' ? '' : name}`;
       let middlewares = [];
+      let method = 'get';
+      let handler;
+      let params;
 
-      const methodLower = method.toLowerCase();
-
-      switch (typeof handler) {
+      switch (typeof body) {
         case 'object':
-          modifiedUrl += `/${handler.params.join('/')}`;
-          middlewares = handler.middlewares || [];
-          handler = handler.handler;
+          params = body.params || [];
+          middlewares = body.middlewares;
+          modifiedUrl += `/${params.join('/')}`;
+          handler = body.handler;
+          method = (body.method || 'get').toLowerCase();
           break;
         case 'function':
-          // Nothing to do with the pure handler.
+          handler = body;
           break;
-        default:
-          throw Error('[load-router]: invalid router definition: ', modifiedUrl);
+        default: return;
       }
 
       if (excludeRules.indexOf(modifiedUrl) !== -1) {
         // Nothing to-do with the excluded rules
-      } else if (METHOD_ENUM.indexOf(methodLower) !== -1) {
-        app[methodLower](rewriteRules.has(modifiedUrl) ?
+      } else if (METHOD_ENUM.indexOf(method) !== -1) {
+        if (!handler) throw Error('[express-load-router]: no handler for method: ', method);
+
+        app[method](rewriteRules.has(modifiedUrl) ?
           rewriteRules.get(modifiedUrl) :
           modifiedUrl, compose(middlewares), handler);
       } else {
-        throw Error('[load-router]: invalid method: ', methodLower);
+        throw Error('[load-router]: invalid method: ', method);
+      }
+    }
+
+    methods.forEach((method) => {
+      const methodName = method;
+      const methodBody = controller[method];
+
+      if (Array.isArray(methodBody)) {
+        methodBody.forEach((m) => {
+          applyMethod(methodName, m);
+        });
+      } else {
+        applyMethod(methodName, methodBody);
       }
     });
   });
