@@ -13,6 +13,16 @@ Load routers from specific folders for Express.js
 [david-image]: https://img.shields.io/david/SFantasy/express-load-router.svg
 [david-url]: https://david-dm.org/SFantasy/express-load-router
 
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Install](#install)
+- [Usage](#usage)
+- [Options](#options)
+    - [`Controller` declaration](#controller-declaration)
+    - [Middlewares support](#middlewares-support)
+- [Example](#example)
+- [License](#license)
+
 ## Install
 
 ```
