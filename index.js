@@ -22,7 +22,7 @@ function loadRouter(app, root, options) {
 
     function applyMethod(name, methodBody) {
       const body = methodBody;
-      let modifiedUrl = `${urlPrefix}/${name === 'index' ? '' : name}`;
+      let modifiedUrl = `${urlPrefix}${name === 'index' ? '' : `/${name}`}`;
       let middlewares = [];
       let method = 'get';
       let handler;

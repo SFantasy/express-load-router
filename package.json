@@ -1,6 +1,6 @@
 {
   "name": "express-load-router",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "automatic create routers from specified folder",
   "author": "Fantasy Shao <fantasyshao@icloud.com>",
   "license": "MIT",
