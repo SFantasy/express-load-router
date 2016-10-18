@@ -43,14 +43,48 @@ loadRouter(app, path.join(__dirname, 'controllers'), options);
 `excludeRules` | Array | `[]`
 `rewriteRules` | Map   | `new Map()`
 
-### Middlewares
+### `Controller` declaration
+
+There are three kinds of `Controller` for this package:
+
+- Plain function
+
+```js
+exports.api = (req, res) => {
+  res.send('API');
+};
+```
+
+- Object
+
+Property |  Type  | Required | Default | Note
+---------|--------|----------|---------|-------
+method   | String |    No    |  `GET`  | one of ['GET', 'POST', 'PUT', 'DELETE']
+params   | Array  |    No    |  `[]`   |
+middlewares | Array | No     |  `[]`   | Array of middlewares, see below
+handler  | Function | Yes    |   --    | 
+
+e.g.
+
+```js
+exports.api = {
+  method: 'GET',
+  params: [':id'],
+  handler(req, res) {
+    res.send('API');
+  }
+};
+```
+
+### Middlewares support 
 
 This package also support `middlewares` in `controller`.
 
 e.g.
 
 ```js
-exports.GET = {
+exports.api = {
+  method: 'GET',
   params: [':id'],
   middlewares: [
     function (req, res, next) {
@@ -66,7 +100,6 @@ exports.GET = {
     return res.send(`product detail ${req.params.id}`);
   },
 };
-
 ```
 
 ## Example
