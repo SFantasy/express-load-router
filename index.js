@@ -49,7 +49,7 @@ function loadRouter(app, root, options) {
 
         app[method](rewriteRules.has(modifiedUrl) ?
           rewriteRules.get(modifiedUrl) :
-          modifiedUrl, compose(middlewares), handler);
+          modifiedUrl, compose(middlewares, modifiedUrl), handler);
       } else {
         throw Error('[load-router]: invalid method: ', method);
       }
