@@ -2,6 +2,7 @@
 
 // Module dependencies
 const glob = require('glob');
+const os = require('os');
 
 const compose = require('./lib/compose');
 
@@ -11,9 +12,10 @@ function loadRouter(app, root, options) {
   const opt = options || {};
 
   glob.sync(`${root}/**/*.js`).forEach((file) => {
+    const realRoot = os.platform() === 'win32' ? root.replace(/\\/ig, '/') : root;
     const filePath = file.replace(/\.[^.]*$/, '');
     const controller = require(filePath);
-    const urlPrefix = filePath.replace(root, '').replace(/\/index$/, '');
+    const urlPrefix = filePath.replace(realRoot, '').replace(/\/index$/, '');
     const methods = Object.keys(controller);
 
     // Handle options
