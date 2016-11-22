@@ -1,7 +1,7 @@
 {
   "name": "express-load-router",
-  "version": "2.1.0",
-  "description": "automatic create routers from specified folder",
+  "version": "2.1.1",
+  "description": "Automatic create routers from specified folder for Express.js",
   "author": "Fantasy Shao <fantasyshao@icloud.com>",
   "license": "MIT",
   "repository": "git@github.com:SFantasy/express-load-router",

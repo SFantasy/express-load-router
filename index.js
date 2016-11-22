@@ -6,7 +6,7 @@ const os = require('os');
 
 const compose = require('./lib/compose');
 
-const METHOD_ENUM = ['get', 'post', 'put', 'delete'];
+const METHOD_ENUM = ['get', 'post', 'put', 'delete', 'patch'];
 
 function loadRouter(app, root, options) {
   const opt = options || {};
