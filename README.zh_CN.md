@@ -1,6 +1,6 @@
 # express-load-router
 
-Load routers from specific folders for Express.js
+Express 自动路由加载模块
 
 [![NPM version][npm-image]][npm-url]
 [![npm download][download-image]][download-url]
@@ -13,23 +13,21 @@ Load routers from specific folders for Express.js
 [david-image]: https://img.shields.io/david/SFantasy/express-load-router.svg
 [david-url]: https://david-dm.org/SFantasy/express-load-router
 
-[中文文档](README.zh_CN.md)
+- [安装](#%E5%AE%89%E8%A3%85)
+  - [使用](#%E4%BD%BF%E7%94%A8)
+    - [可选项](#%E5%8F%AF%E9%80%89%E9%A1%B9)
+    - [`Controller` 声明方式](#controller-%E5%A3%B0%E6%98%8E%E6%96%B9%E5%BC%8F)
+    - [中间件支持](#%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%94%AF%E6%8C%81)
+  - [例子](#%E4%BE%8B%E5%AD%90)
+  - [协议](#%E5%8D%8F%E8%AE%AE)
 
-- [Install](#install)
-- [Usage](#usage)
-- [Options](#options)
-    - [`Controller` declaration](#controller-declaration)
-    - [Middlewares support](#middlewares-support)
-- [Example](#example)
-- [License](#license)
-
-## Install
+## 安装
 
 ```
 npm i express-load-router -S
 ```
 
-## Usage
+## 使用
 
 ```js
 const path = require('path');
@@ -42,22 +40,22 @@ const app = express();
 loadRouter(app, path.join(__dirname, 'controllers'));
 ```
 
-### Options
+### 可选项
 
 ```js
 loadRouter(app, path.join(__dirname, 'controllers'), options);
 ```
 
-     option    |  type | default
+     选项    |  类型 | 默认值
 ---------------|-------|---------
 `excludeRules` | Array | `[]`
 `rewriteRules` | Map   | `new Map()`
 
-### `Controller` declaration
+### `Controller` 声明方式
 
-There are three kinds of `Controller` for this package:
+使用此模块的时候，有三种 `Controller` 的声明方式：
 
-- Plain function
+- 函数
 
 ```js
 exports.api = (req, res) => {
@@ -65,13 +63,13 @@ exports.api = (req, res) => {
 };
 ```
 
-- Object
+- 对象
 
-Property |  Type  | Required | Default | Note
+属性 |  类型  | 是否必须 | 默认 | 备注
 ---------|--------|----------|---------|-------
-method   | String |    No    |  `GET`  | one of ['GET', 'POST', 'PUT', 'DELETE']
+method   | String |    No    |  `GET`  | 枚举值 ['GET', 'POST', 'PUT', 'DELETE']
 params   | Array  |    No    |  `[]`   |
-middlewares | Array | No     |  `[]`   | Array of middlewares, see below
+middlewares | Array | No     |  `[]`   | 中间件数组，详见下方文档
 handler  | Function | Yes    |   --    |
 
 e.g.
@@ -86,9 +84,9 @@ exports.api = {
 };
 ```
 
-### Middlewares support
+### 中间件支持
 
-This package also support `middlewares` in `controller`.
+模块支持在 `controller` 中使用 `middlewares`
 
 e.g.
 
@@ -112,10 +110,10 @@ exports.api = {
 };
 ```
 
-## Example
+## 例子
 
-See [example](example/).
+见 [example](example/).
 
-## License
+## 协议
 
 The [MIT License](LICENSE)
