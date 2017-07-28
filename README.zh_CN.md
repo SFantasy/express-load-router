@@ -14,12 +14,12 @@ Express 自动路由加载模块
 [david-url]: https://david-dm.org/SFantasy/express-load-router
 
 - [安装](#%E5%AE%89%E8%A3%85)
-  - [使用](#%E4%BD%BF%E7%94%A8)
-    - [可选项](#%E5%8F%AF%E9%80%89%E9%A1%B9)
-    - [`Controller` 声明方式](#controller-%E5%A3%B0%E6%98%8E%E6%96%B9%E5%BC%8F)
-    - [中间件支持](#%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%94%AF%E6%8C%81)
-  - [例子](#%E4%BE%8B%E5%AD%90)
-  - [协议](#%E5%8D%8F%E8%AE%AE)
+- [使用](#%E4%BD%BF%E7%94%A8)
+  - [可选项](#%E5%8F%AF%E9%80%89%E9%A1%B9)
+  - [`Controller` 声明方式](#controller-%E5%A3%B0%E6%98%8E%E6%96%B9%E5%BC%8F)
+  - [中间件支持](#%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%94%AF%E6%8C%81)
+- [例子](#%E4%BE%8B%E5%AD%90)
+- [协议](#%E5%8D%8F%E8%AE%AE)
 
 ## 安装
 
