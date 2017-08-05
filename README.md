@@ -48,7 +48,7 @@ loadRouter(app, path.join(__dirname, 'controllers'));
 loadRouter(app, path.join(__dirname, 'controllers'), options);
 ```
 
-     option    |  type | default
+option         |  type | default
 ---------------|-------|---------
 `excludeRules` | Array | `[]`
 `rewriteRules` | Map   | `new Map()`
