@@ -46,7 +46,7 @@ loadRouter(app, path.join(__dirname, 'controllers'));
 loadRouter(app, path.join(__dirname, 'controllers'), options);
 ```
 
-     选项    |  类型 | 默认值
+选项            |  类型 | 默认值
 ---------------|-------|---------
 `excludeRules` | Array | `[]`
 `rewriteRules` | Map   | `new Map()`
