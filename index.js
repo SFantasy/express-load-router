@@ -53,10 +53,10 @@ function loadRouter(app, root, options) {
           rewriteRules.get(modifiedUrl) :
           modifiedUrl, compose(middlewares, modifiedUrl), handler);
         if (name === 'index') {
-            let indexModifiedUrl = `${modifiedUrl}/index`;
-            app[method](rewriteRules.has(indexModifiedUrl) ?
-                rewriteRules.get(indexModifiedUrl) :
-                indexModifiedUrl, compose(middlewares, indexModifiedUrl), handler);
+          const indexModifiedUrl = `${modifiedUrl}/index`;
+          app[method](rewriteRules.has(indexModifiedUrl) ?
+            rewriteRules.get(indexModifiedUrl) :
+            indexModifiedUrl, compose(middlewares, indexModifiedUrl), handler);
         }
       } else {
         throw Error('[load-router]: invalid method: ', method);
