@@ -54,7 +54,11 @@ function loadRouter(app, root, options) {
         // Nothing to-do with the excluded rules
       } else if (METHOD_ENUM.indexOf(method) !== -1) {
         if (!handler) throw Error('[express-load-router]: no handler for method: ', method);
-        applyUrl(`${modifiedUrl}${name === 'index' ? '/index' : ''}`);
+        // 这里兼容两种 index 的访问方式
+        applyUrl(modifiedUrl);
+        if (name === 'index') {
+          applyUrl(`${modifiedUrl}/index`);
+        }
       } else {
         throw Error('[load-router]: invalid method: ', method);
       }
