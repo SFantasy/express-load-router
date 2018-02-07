@@ -44,20 +44,17 @@ function loadRouter(app, root, options) {
         default: return;
       }
 
+      function applyUrl(url) {
+        app[method](rewriteRules.has(url) ?
+          rewriteRules.get(url) :
+          url, compose(middlewares, url), handler);
+      }
+
       if (excludeRules.indexOf(modifiedUrl) !== -1) {
         // Nothing to-do with the excluded rules
       } else if (METHOD_ENUM.indexOf(method) !== -1) {
         if (!handler) throw Error('[express-load-router]: no handler for method: ', method);
-
-        app[method](rewriteRules.has(modifiedUrl) ?
-          rewriteRules.get(modifiedUrl) :
-          modifiedUrl, compose(middlewares, modifiedUrl), handler);
-        if (name === 'index') {
-          const indexModifiedUrl = `${modifiedUrl}/index`;
-          app[method](rewriteRules.has(indexModifiedUrl) ?
-            rewriteRules.get(indexModifiedUrl) :
-            indexModifiedUrl, compose(middlewares, indexModifiedUrl), handler);
-        }
+        applyUrl(`${modifiedUrl}${name === 'index' ? '/index' : ''}`);
       } else {
         throw Error('[load-router]: invalid method: ', method);
       }
